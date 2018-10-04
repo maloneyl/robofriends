@@ -25,14 +25,14 @@ class App extends Component {
   }
 
   render() {
-    const filteredRobots = this.state.robots.filter(robot => {
-      return robot.name.toLowerCase().includes(this.state.searchfield.toLowerCase())
+    const { robots, searchfield } = this.state;
+    const filteredRobots = robots.filter(robot => {
+      return robot.name.toLowerCase().includes(searchfield.toLowerCase())
     })
 
-    if (this.state.robots.length === 0) {
-      return <h3 className='tc pa3'>Loading...</h3>
-    } else {
-      return (
+    return (!robots.length) ?
+      <h3 className='tc pa3'>Loading...</h3> :
+      (
         <div className='tc'>
           <h1 className='f1'>RoboFriends</h1>
           <SearchBox searchChange={this.onSearchChange} />
@@ -41,7 +41,6 @@ class App extends Component {
           </Scroll>
         </div>
       )
-    }
   }
 }
 
